@@ -1,0 +1,125 @@
+<section id="advanced">
+
+    <section>
+        <h2>Notions avancées</h2>
+    </section>
+
+    <section>
+        <h3>Historique</h3>
+        <p>Il existe plusieurs façons de gérer l'historisation des données.</p>
+        <p>L'une d'entre elles consiste à créer une entité "archive" contenant généralement les mêmes propriétés que la table principale avec en plus la date de mise à jour :</p>
+        <img src="assets/images/mcd-history.png" alt="Historisation">
+    </section>
+
+    <section>
+        <h3>Héritage</h3>
+        <p>Il arrive souvent que plusieurs entités partagent des données communes et "héritent" d'une même entité mère.</p>
+        <p>On peut alors représenter cette notion d'<strong>héritage</strong> de cette manière :</p>
+        <img src="assets/images/mcd-inheritance.png" alt="Héritage">
+    </section>
+
+    <section>
+        <h3>Associations ternaires</h3>
+        <p>Les associations ternaires permettent de lier 3 associations entre elles.</p>
+        <p>Dans l'exemple ci-dessous, plusieurs personnes peuvent participer à la réalisation d'un film mais avec des rôles différents.</p>
+        <img src="assets/images/mcd-ternary.png" alt="Ternaire">
+        <p>Effectuer le passage au MLD. Est-il possible qu'un personne puisse jouer plusieurs rôles dans un film (par exemple, dans le film M. Batignole, Gérard Jugnot est à la fois acteur et réalisateur) ?</p>
+    </section>
+
+    <section>
+        <h3>Double associations</h3>
+        <p>Dans certaines situations, il est tout à fait possible de créer plusieurs associations entre deux mêmes entités.</p>
+        <p>Par exemple, dans le diagramme MCD ci-dessous, il y a deux associations entre <code>utilisateur</code> et <code>personne</code>. L'une permet de représenter l'utilisateur qui a rédigé l'article et l'autre ceux qui l'ont aimé :</p>
+        <img src="assets/images/mcd-double-associations.png" alt="Double associations">
+        <p>Comment feriez-vous pour permettre de gérer également les utilisateurs qui auraient le droit d'éditer l'article (en plus de celui qui l'a créé) ?</p>
+    </section>
+
+    <section>
+        <h3>Récursivité</h3>
+        <p>Très souvent utilisée dans les bases de données, la récursivité permet de représenter des hiérarchies ou arbres d'une profondeur non définie.</p>
+        <p>Dans l'exemple ci-dessous, on représente une entité catégorie pouvant avoir une catégorie parent :</p>
+        <img src="assets/images/mcd-recursivity.png" alt="Récursivité">
+        <p>Avez-vous d'autres exemples d'entités pouvant utiliser la récursivité ?</p>
+    </section>
+
+    <section>
+        <h3>Contraintes</h3>
+        <p>Les contraintes sont des notions introduites dans la <strong>version 2</strong> de la méthode Merise.</p>
+        <p>Elles permettent d'apporter <strong>plus de précisions</strong> dans les diagrammes MCD.</p>
+        <p>Les contraintes ne <strong>changent pas la structure</strong> de la base de données.</p>
+        <p>Elles peuvent être implémentées via des <strong>triggers ou procédures stockées</strong>.</p>
+    </section>
+
+    <section>
+        <h3>Héritage - Disjonction</h3>
+        <p>La disjonction (ou exclusion) permet de représenter la présence dans un seul enfant.</p>
+        <p>Dans cet exemple, une personne peut être soit un étudiant, soit un enseignant mais pas les deux en même temps. Une personne peut également être ni enseignant ni étudiant.</p>
+        <img src="assets/images/mcd-disjonction.png" alt="Disjonction">
+    </section>
+
+    <section>
+        <h3>Héritage - Couverture</h3>
+        <p>La couverture (ou totalité) permet de représenter la présence dans au moins un enfant.</p>
+        <p>Dans cet exemple, une personne doit être soit un étudiant, soit un enseignant ou même les deux en même temps.</p>
+        <img src="assets/images/mcd-couverture.png" alt="Couverture">
+    </section>
+
+    <section>
+        <h3>Héritage - Partition</h3>
+        <p>La partition (ou exclusion + totalité) permet de représenter la présence dans au moins un et un seul enfant.</p>
+        <p>Dans cet exemple, une personne doit être soit un étudiant, soit un enseignant mais ne peut pas être les deux en même temps.</p>
+        <img src="assets/images/mcd-partition.png" alt="Partition">
+        <footer>
+            <a href="#" class="info">XT peut également être représenté avec le symbole +</a>
+        </footer>
+    </section>
+
+    <section>
+        <h3>Association - Exclusion</h3>
+        <p>L'exclusion peut également être utilisée sur les associations.</p>
+        <p>Ici, on précise qu'un utilisateur ne <strong>peut pas à la fois rédiger un article et aimer l'article</strong> qu'il a rédigé.</p>
+        <img src="assets/images/mcd-association-exclusion.png" alt="Exclusion">
+        <p>Les pointillés représentent le <strong>pivot</strong>. Il s'agit de la clé représentée par la contrainte.</p>
+        <p>Il permet ici d'indiquer qu'on ne peut pas avoir les mêmes identifiants utilisateur / article dans l'association <code>redige</code> et dans l'association <strong>aime</strong>.</p>
+    </section>
+
+    <section>
+        <h3>Association - Exclusion</h3>
+        <p>Le pivot peut également être positionné sur une seule entité.</p>
+        <img src="assets/images/mcd-association-exclusion-2.png" alt="Exclusion">
+        <p>Cependant, pouvez-vous expliquez pourquoi cette représentation semble incohérente dans notre exemple ?</p>
+        <footer>
+            <a href="#" class="info" style="font-size: 0.7em;">Si les pivots ne sont pas représentés, on considère qu'ils sont présent sur toutes les entités</a>
+        </footer>
+    </section>
+
+    <section>
+        <h3>Association - Exclusion</h3>
+        <p>Voici un autre exemple d'exclusion.</p>
+        <p>Ici, elle permet d'indiquer qu'une galerie ne peut pas contenir à la fois des images et des vidéos.</p>
+        <img src="assets/images/mcd-association-exclusion-3.png" alt="Exclusion">
+    </section>
+
+    <section>
+        <h3>Association - Inclusion</h3>
+        <p>La contrainte d'inclusion permet de préciser qu'une clé doit obligatoirement être présente dans une autre association.</p>
+        <p>Dans l'exemple ci-dessous, une personne ne peut pas intégrer un groupe si elle n'en a pas préalablement fait la demande :</p>
+        <img src="assets/images/mcd-association-inclusion.png" alt="Inclusion">
+        <p>La flèche permet de préciser le sens de l'inclusion.</p>
+    </section>
+
+    <section>
+        <h3>Association - Totalité</h3>
+        <p>Sur une association, la totalité permet de préciser qu'une clé doit être présente dans au moins une des associations.</p>
+        <p>Dans l'exemple ci-dessous, une galerie ne peut pas être créée sans contenir ni d'images, ni de vidéos :</p>
+        <img src="assets/images/mcd-association-totalite.png" alt="Totalité">
+    </section>
+
+    <section>
+        <h3>Association - Égalité</h3>
+        <p>Sur une association, l'égalité (ou simultanéité) permet de préciser qu'une clé doit être présente dans une association si elle est présent dans une autre.</p>
+        <p>Dans l'exemple ci-dessous, une personne qui joue dans une équipe doit pratiquer un sport et une personne pratiquant un sport est obligatoirement dans une équipe :</p>
+        <img src="assets/images/mcd-association-egalite.png" alt="Égalité">
+    </section>
+
+</section>

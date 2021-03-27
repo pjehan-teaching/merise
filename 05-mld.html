@@ -1,0 +1,80 @@
+<section id="mcd">
+
+    <section>
+        <h2>MLD</h2>
+        <h3>Modèle Logique des Données</h3>
+    </section>
+
+    <section>
+        <h3>MLD</h3>
+        <p>Un MLD peut être généré à partir d'un MCD. Il permettra de représenter schématiquement les <strong>tables</strong> à créer dans une base de données.</p>
+        <p>On ne parlera alors plus d'entités mais de <strong>tables</strong>, les identifiants deviennent des <strong>clés</strong> et les attributs des <strong>colonnes</strong>.</p>
+        <p>Pour effectuer la transition, nous allons appliquer un certain nombre de changements...</p>
+    </section>
+
+    <section>
+        <h3>Passage du MCD au MLD</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Entité A</th>
+                <th>Entité B</th>
+                <th>Résultat</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>0,1 ou 1,1</td>
+                <td>0,N ou 1,N</td>
+                <td>1-N : Création d'une clé étrangère dans l'entité A</td>
+            </tr>
+            <tr>
+                <td>0,N ou 1,N</td>
+                <td>0,N ou 1,N</td>
+                <td>N-N : La relation entre les entités est transformée en table</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="container">
+            <div class="col">
+                <img src="assets/images/mcd-livre.png" alt="MCD">
+            </div>
+            <div class="col">
+                <img src="assets/images/mld-livre.png" alt="MLD">
+            </div>
+        </div>
+        <footer>
+            <a href="#" class="info">Se focaliser sur le symbole après la virgule</a>
+        </footer>
+    </section>
+
+    <section>
+        <h3>Exercice</h3>
+        <div class="instructions">
+            <div>
+                <p>Réalisez le MCD puis le MLD d'une application de gestion d'une école en suivant les règles de gestion suivantes :</p>
+                <ol>
+                    <li>Un étudiant peut être dans une classe différente chaque année</li>
+                    <li>Une classe peut assister à plusieurs cours dans l'année mais il ne peut y avoir qu'une seule classe par cours</li>
+                    <li>Un enseignant peut donner plusieurs cours dans l'année mais il ne peut y avoir qu'un seul enseignant par cours</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h3>Exercice</h3>
+        <div class="instructions">
+            <div>
+                <p>Réalisez le MCD puis le MLD d'un site ecommerce en suivant les règles de gestion suivantes :</p>
+                <ol>
+                    <li>Un internaute peut créer un compte et passer des commandes</li>
+                    <li>Chaque commande est associée à un moyen de paiement</li>
+                    <li>Une commande contient un ou plusieurs produits</li>
+                    <li>Un même produit peut être commandé plusieurs fois</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+</section>

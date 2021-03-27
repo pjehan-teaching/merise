@@ -1,0 +1,471 @@
+<section id="normalization">
+
+    <section>
+        <h2>Normalisation</h2>
+    </section>
+
+    <section>
+        <h3>Formes normales</h3>
+        <p>La forme normale est une normalisation permettant d'éviter les anomalies pouvant apparaître dans une base de données relationnelle.</p>
+        <p>Il existe plusieurs niveaux de normalisation mais les plus connus sont les 3 premiers.</p>
+        <p>Prenons en exemple les données suivantes :</p>
+        <table class="db-table" style="font-size: 0.4em;">
+            <caption>Livre</caption>
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th>Auteur Nationalité</th>
+                <th>Format</th>
+                <th>Prix</th>
+                <th>Sujet</th>
+                <th>Pages</th>
+                <th>Éditeur</th>
+                <th>Pays Éditeur</th>
+                <th>ID Genre</th>
+                <th>Nom Genre</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Les misérables</td>
+                <td>Victor Hugo</td>
+                <td>Française</td>
+                <td>Rigide</td>
+                <td>29.90</td>
+                <td>Histoire, Paris, Social</td>
+                <td>2598</td>
+                <td>Albert Lacroix</td>
+                <td>France</td>
+                <td>1</td>
+                <td>Roman</td>
+            </tr>
+            <tr>
+                <td>Hamlet</td>
+                <td>William Shakespeare</td>
+                <td>Anglaise</td>
+                <td>Ebook</td>
+                <td>5.99</td>
+                <td>Histoire</td>
+                <td>342</td>
+                <td>Simon & Schuster</td>
+                <td>Angleterre</td>
+                <td>2</td>
+                <td>Tragédie</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h3>1NF</h3>
+        <p>L'entité possède un identifiant. Il est donc possible de retrouver l'ensemble de ses propriétés à partir de sa clé. De plus, les données sont bien séparées les unes des autres.</p>
+        <p>Dans l'exemple précédent, la colonne <strong>Sujet</strong> contenait une liste de sujets ce qui ne respecte pas la norme 1NF.</p>
+        <p>Nous pouvons corriger de cette manière :</p>
+        <table class="db-table" style="font-size: 0.4em;">
+            <caption>Livre</caption>
+            <thead>
+            <tr>
+                <th class="pk">Titre</th>
+                <th class="pk">Format</th>
+                <th>Auteur</th>
+                <th>Auteur Nationalité</th>
+                <th>Prix</th>
+                <th>Sujet 1</th>
+                <th>Sujet 2</th>
+                <th>Sujet 3</th>
+                <th>Pages</th>
+                <th>Éditeur</th>
+                <th>Pays Éditeur</th>
+                <th>ID Genre</th>
+                <th>Nom Genre</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Les misérables</td>
+                <td>Rigide</td>
+                <td>Victor Hugo</td>
+                <td>Française</td>
+                <td>29.90</td>
+                <td>Histoire</td>
+                <td>Paris</td>
+                <td>Social</td>
+                <td>2598</td>
+                <td>Albert Lacroix</td>
+                <td>France</td>
+                <td>1</td>
+                <td>Roman</td>
+            </tr>
+            <tr>
+                <td>Hamlet</td>
+                <td>Ebook</td>
+                <td>William Shakespeare</td>
+                <td>Anglaise</td>
+                <td>5.99</td>
+                <td>Histoire</td>
+                <td></td>
+                <td></td>
+                <td>342</td>
+                <td>Simon & Schuster</td>
+                <td>Angleterre</td>
+                <td>2</td>
+                <td>Tragédie</td>
+            </tr>
+            </tbody>
+        </table>
+        <p>Cependant, cette structure ne permet pas de gérer plus de 3 sujets pour un livre...</p>
+    </section>
+
+    <section>
+        <h3>1NF</h3>
+        <p>... nous allons donc améliorer l'organisation des données en externalisant le sujet mais également l'éditeur dans des tableaux séparés :</p>
+        <div class="container">
+            <div class="col">
+                <table class="db-table" style="font-size: 0.5em;">
+                    <caption>Livre</caption>
+                    <thead>
+                    <tr>
+                        <th class="pk">Titre</th>
+                        <th class="pk">Format</th>
+                        <th>Auteur</th>
+                        <th>Auteur Nationalité</th>
+                        <th>Prix</th>
+                        <th>Pages</th>
+                        <th>Éditeur</th>
+                        <th>ID Genre</th>
+                        <th>Nom Genre</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Les misérables</td>
+                        <td>Rigide</td>
+                        <td>Victor Hugo</td>
+                        <td>Française</td>
+                        <td>29.90</td>
+                        <td>2598</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>Roman</td>
+                    </tr>
+                    <tr>
+                        <td>Hamlet</td>
+                        <td>Ebook</td>
+                        <td>William Shakespeare</td>
+                        <td>Anglaise</td>
+                        <td>5.99</td>
+                        <td>342</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>Tragédie</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col">
+                <table class="db-table" style="font-size: 0.5em;">
+                    <caption>Sujet</caption>
+                    <thead>
+                    <tr>
+                        <th class="pk">ID Sujet</th>
+                        <th>Nom</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Histoire</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Paris</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Social</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <table class="db-table" style="font-size: 0.5em;">
+                    <caption>Éditeur</caption>
+                    <thead>
+                    <tr>
+                        <th class="pk">ID Éditeur</th>
+                        <th>Nom</th>
+                        <th>Pays</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Albert Lacroix</td>
+                        <td>France</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Simon & Schuster</td>
+                        <td>Angleterre</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <table class="db-table" style="font-size: 0.5em;">
+                    <caption>Livre - Sujet</caption>
+                    <thead>
+                    <tr>
+                        <th class="pk">Titre Livre</th>
+                        <th class="pk">ID Sujet</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Les misérables</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Les misérables</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Les misérables</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Hamlet</td>
+                        <td>1</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h3>2NF</h3>
+        <p>Respecte la 1NF et s'assure qu'il n'y a pas de duplication des données dans les colonnes d'un tableau.</p>
+        <p>En considérant l'exemple suivant :</p>
+        <table class="db-table" style="font-size: 0.5em;">
+            <caption>Livre</caption>
+            <thead>
+            <tr>
+                <th class="pk">Titre</th>
+                <th class="pk">Format</th>
+                <th>Auteur</th>
+                <th>Auteur Nationalité</th>
+                <th>Prix</th>
+                <th>Pages</th>
+                <th>Éditeur</th>
+                <th>ID Genre</th>
+                <th>Nom Genre</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Les misérables</td>
+                <td>Rigide</td>
+                <td>Victor Hugo</td>
+                <td>Française</td>
+                <td>29.90</td>
+                <td>2598</td>
+                <td>1</td>
+                <td>1</td>
+                <td>Roman</td>
+            </tr>
+            <tr>
+                <td>Les misérables</td>
+                <td>Ebook</td>
+                <td>Victor Hugo</td>
+                <td>Française</td>
+                <td>9.90</td>
+                <td>2598</td>
+                <td>1</td>
+                <td>1</td>
+                <td>Roman</td>
+            </tr>
+            <tr>
+                <td>Hamlet</td>
+                <td>Ebook</td>
+                <td>William Shakespeare</td>
+                <td>Anglaise</td>
+                <td>5.99</td>
+                <td>342</td>
+                <td>2</td>
+                <td>2</td>
+                <td>Tragédie</td>
+            </tr>
+            </tbody>
+        </table>
+        <p>Seule la colonne <code>prix</code> change en fonction du format.</p>
+    </section>
+
+    <section>
+        <h3>2NF</h3>
+        <p>Pour normaliser cette table et éviter la duplication de donnée, nous allons définir la colonne <code>titre</code> comme seul identifiant du tableau et déplacer le prix dans un autre tableau :</p>
+        <div class="container">
+            <div class="col">
+                <table class="db-table" style="font-size: 0.5em;">
+                    <caption>Livre</caption>
+                    <thead>
+                    <tr>
+                        <th class="pk">Titre</th>
+                        <th>Auteur</th>
+                        <th>Auteur Nationalité</th>
+                        <th>Pages</th>
+                        <th>Éditeur</th>
+                        <th>ID Genre</th>
+                        <th>Nom Genre</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Les misérables</td>
+                        <td>Victor Hugo</td>
+                        <td>Française</td>
+                        <td>2598</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>Roman</td>
+                    </tr>
+                    <tr>
+                        <td>Hamlet</td>
+                        <td>William Shakespeare</td>
+                        <td>Anglaise</td>
+                        <td>342</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>Tragédie</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <table class="db-table" style="font-size: 0.5em;">
+                    <caption>Format - Prix</caption>
+                    <thead>
+                    <tr>
+                        <th class="pk">Titre</th>
+                        <th class="pk">Format</th>
+                        <th>Prix</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Les misérables</td>
+                        <td>Rigide</td>
+                        <td>29.90</td>
+                    </tr>
+                    <tr>
+                        <td>Les misérables</td>
+                        <td>Ebook</td>
+                        <td>19.90</td>
+                    </tr>
+                    <tr>
+                        <td>Hamlet</td>
+                        <td>Ebook</td>
+                        <td>5.90</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h3>3NF</h3>
+        <p>Le tableau <code>Livre</code> a toujours des colonnes dépendants d'autres colonnes qui ne sont pas l'identifiant du tableau (colonne <code>titre</code>).</p>
+        <p>La colonne <code>Auteur Nationalité</code> dépend de la colonne <code>Auteur</code> qui est elle-même dépendante du <code>titre</code>.</p>
+        <p>De la même façon, la colonne <code>Nom Genre</code> dépend de la colonne <code>ID Genre</code> qui est elle-même dépendante du <code>titre</code>.</p>
+    </section>
+
+    <section>
+        <h3>3NF</h3>
+        <p>Nous allons donc encore une fois séparer les données dans des tables différentes pour éviter la duplication de données :</p>
+        <table class="db-table" style="font-size: 0.5em;">
+            <caption>Livre</caption>
+            <thead>
+            <tr>
+                <th class="pk">Titre</th>
+                <th>Auteur</th>
+                <th>Pages</th>
+                <th>Éditeur</th>
+                <th>ID Genre</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Les misérables</td>
+                <td>Victor Hugo</td>
+                <td>2598</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>Hamlet</td>
+                <td>William Shakespeare</td>
+                <td>342</td>
+                <td>2</td>
+                <td>2</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="container">
+            <div class="col">
+                <table class="db-table" style="font-size: 0.5em;">
+                    <caption>Auteur</caption>
+                    <thead>
+                    <tr>
+                        <th class="pk">Auteur</th>
+                        <th>Auteur Nationalité</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Victor Hugo</td>
+                        <td>Française</td>
+                    </tr>
+                    <tr>
+                        <td>William Shakespeare</td>
+                        <td>Anglaise</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <table class="db-table" style="font-size: 0.5em;">
+                    <caption>Genre</caption>
+                    <thead>
+                    <tr>
+                        <th class="pk">ID Genre</th>
+                        <th>Nom Genre</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Roman</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Tragédie</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h3>Avantages</h3>
+        <ul>
+            <li>Limiter les redondances de données</li>
+            <li>Éviter les incohérences dans les données</li>
+        </ul>
+    </section>
+
+</section>

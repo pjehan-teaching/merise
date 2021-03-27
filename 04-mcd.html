@@ -1,0 +1,129 @@
+<section id="mcd">
+
+    <section>
+        <h2>MCD</h2>
+        <h3>Modèle Conceptuel des Données</h3>
+    </section>
+
+    <section>
+        <h3>MCD</h3>
+        <p>Un MCD va permettre de représenter les différentes <strong>entités</strong> d'un système ainsi que les <strong>associations</strong> entre ces entités.</p>
+        <p>Une entité va représenter un objet de gestion (une voiture, une personne, une facture, une entreprise...) tandis qu'une association va représenter un lien entre deux entités (conduit, paye, rédige...).</p>
+    </section>
+
+    <section>
+        <h3>Entité</h3>
+        <p>Une entité aura un nom, un identifiant ainsi que des propriétés.</p>
+        <img src="assets/images/mcd-entite.png" alt="Entité">
+    </section>
+
+    <section>
+        <h3>Association</h3>
+        <p>Une association aura un nom ainsi qu'une liste optionnelle de données incluses dans l'association.</p>
+        <img src="assets/images/mcd-association.png" alt="Association">
+    </section>
+
+    <section>
+        <h3>Cardinalité</h3>
+        <p>Nous allons également préciser sur chaque association les cardinalités.</p>
+        <ul>
+            <li><strong>0,1</strong> : Présence 0 ou 1 fois</li>
+            <li><strong>0,N</strong> : Présence 0 ou plusieurs fois</li>
+            <li><strong>1,1</strong> : Présence obligatoire 1 seule fois</li>
+            <li><strong>1,N</strong> : Présence obligatoire 1 ou plusieurs fois</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Cardinalité</h3>
+        <p>Les cardinalités se lisent de la façon suivante :</p>
+        <ul>
+            <li>Un Auteur peut rédiger 0 ou plusieurs Livres</li>
+            <li>Un Livre peut être rédigé par 1 ou plusieurs Auteurs</li>
+            <li>Un Livre peut être édité par 1 seul Editeur</li>
+            <li>Un Editeur peut éditer 0 ou plusieurs Livres</li>
+        </ul>
+        <img src="assets/images/mcd-livre.png" alt="MCD Livre">
+        <footer>
+            <a href="#" class="warning">Les cardinalités sont inversées par rapport à UML !</a>
+        </footer>
+    </section>
+
+    <section>
+        <h3>Contraintes d'intégrité</h3>
+        <p>On peut distinguer 2 types d'associations :</p>
+        <ul>
+            <li>Contrainte d'Intégrité Fonctionnelle (CIF) : Une des cardinalités max à 1 et non porteuse d'information.</li>
+            <li>Contrainte d'Intégrité Multiple (CIM) : Deux cardinalités max à N et peut contenir des informations.</li>
+        </ul>
+        <p>Cela aura de l'importance lors du <strong>passage au MLD</strong>.</p>
+    </section>
+
+    <section>
+        <h3>Exercice</h3>
+        <div class="instructions">
+            <div>
+                <p>Réalisez le MCD d'une application pour un cabinet médical en suivant les règles de gestion suivantes :</p>
+                <ol>
+                    <li>Une consultation est réalisée à une heure précise par un médecin</li>
+                    <li>Lors d'une consultation, un médecin ne peut prendre qu'un seul patient à la fois</li>
+                    <li>Lors d'une consultation, un médecin peut éventuellement préscrire des médicaments au patient</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h3>Dépendances Fonctionnelles</h3>
+        <p>Les dépendances fonctionnelles ont pour objectif d'identifier les liens qu'il sera possible de faire entre les données d'une application.</p>
+        <p>Il y a une dépendance entre une donnée A et une donnée B lorsque la connaissance de la donnée A nous permet d'identifier <strong>une et une seule valeur</strong> de la donnée B</p>
+    </section>
+
+    <section>
+        <h3>Exemple</h3>
+        <p>Si l'on connait l'<strong>identifiant</strong> d'un client, il est alors <strong>possible</strong> de connaitre son nom et son prénom.</p>
+        <p>En revanche, si l'on connait le <strong>nom</strong> d'un client, il n'est <strong>pas possible</strong> de retrouver son identifiant ou son prénom (plusieurs clients pouvant avoir le même nom).</p>
+        <p>On représentera les dépendances fonctionnelles de cette façon :</p>
+        <p><code>Identifiant Client ➡ Nom Client, Prénom Client️</code></p>
+    </section>
+
+    <section>
+        <h3>Exercice</h3>
+        <p>Indiquer si oui ou non il y a une dépendance fonctionnelle dans les cas suivants :</p>
+        <ul>
+            <li>Identifiant Consultation ➡️ Horaire Consultation</li>
+            <li>Identifiant Patient ➡️ Nom Médecin</li>
+            <li>Nom Médicament ➡️ Identifiant Médicament</li>
+            <li>Identifiant Consultation ➡️ Nom Médecin, Prénom Médecin</li>
+            <li>Identifiant Consultation ➡️ Nom Médecin, Prénom Médecin, Nom Patient, Prénom Patient</li>
+            <li>Identifiant Consultation ➡️ Nom Médecin, Prénom Médecin, Nom Patient, Prénom Patient, Nom Médicament</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Exercice</h3>
+        <div class="instructions">
+            <div>
+                <p>Réalisez le MCD d'une application pour gérer le recensement de la population Française :</p>
+                <ol>
+                    <li>Chaque personne sera caractérisée par un nom, un prénom et une date de naissance et sera rattachée à une ville</li>
+                    <li>Une ville sera caractérisée par un nom et un code postal</li>
+                    <li>Une ville sera rattachée à un département, lui-même rattaché à une région</li>
+                </ol>
+            </div>
+        </div>
+        <div class="instructions">
+            <div>
+                <p>Indiquez ensuite si les dépendances fonctionnelles suivantes sont respectées :</p>
+                <ol>
+                    <li>Identifiant Région ➡️ Nom Ville</li>
+                    <li>Identifiant Ville ➡️ Nom Région</li>
+                    <li>Nom Personne, Prénom Personne ➡️ Nom Ville</li>
+                    <li>Identifiant Personne ➡️ Nom Région</li>
+                    <li>Nom Ville ➡️ Nom Région</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+</section>

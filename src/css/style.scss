@@ -1,0 +1,44 @@
+.reveal {
+
+    pre[class*="language-"] {
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 0.6em;
+        &:not(.line-numbers) {
+            padding: 0.5em;
+        }
+        code {
+            padding: 0;
+        }
+    }
+
+    .container {
+        code.col {
+            padding: 0;
+        }
+    }
+
+    table.db-table {
+        border-collapse: collapse;
+        border: 1px solid black;
+
+        caption {
+            border-collapse: collapse;
+            border: 1px solid black;
+            font-weight: bold;
+        }
+
+        thead {
+            background-color: #ccc;
+
+            th {
+                font-weight: normal;
+
+                &.pk {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+}
