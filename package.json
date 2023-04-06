@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "webpack --mode=production",
-    "watch": "webpack --mode=development --watch=true"
+    "watch": "webpack --mode=development --watch"
   },
   "dependencies": {
     "font-awesome": "^4.7.0"
