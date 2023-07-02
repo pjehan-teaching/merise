@@ -59,7 +59,14 @@
 
     <section>
         <h3>1NF</h3>
-        <p>L'entité possède un identifiant. Il est donc possible de retrouver l'ensemble de ses propriétés à partir de sa clé. De plus, les données sont bien séparées les unes des autres.</p>
+        <ol>
+            <li>L'entité possède un <strong>identifiant</strong> permettant d'identifier une ligne de manière unique. L'identifiant peut être composé de plusieurs colonnes.</li>
+            <li>Les données sont bien <strong>séparées</strong> les unes des autres. Une colonnes ne peut pas contenir plusieurs données.</li>
+        </ol>
+        <p>
+            La clé primaire est représentée par les colonnes Titre et Format.
+            Il est généralement recommandé d'utiliser une seule colonne de type numérique pour gérer la clé primaire d'une table.
+        </p>
         <p>Dans l'exemple précédent, la colonne <strong>Sujet</strong> contenait une liste de sujets ce qui ne respecte pas la norme 1NF.</p>
         <p>Nous pouvons corriger de cette manière :</p>
         <table class="db-table" style="font-size: 0.4em;">
@@ -119,15 +126,16 @@
 
     <section>
         <h3>1NF</h3>
-        <p>... nous allons donc améliorer l'organisation des données en externalisant le sujet mais également l'éditeur dans des tableaux séparés :</p>
+        <p>... nous allons donc améliorer l'organisation des données en externalisant le sujet, mais également l'éditeur dans des tableaux séparés :</p>
         <div class="container">
             <div class="col">
                 <table class="db-table" style="font-size: 0.5em;">
                     <caption>Livre</caption>
                     <thead>
                     <tr>
-                        <th class="pk">Titre</th>
-                        <th class="pk">Format</th>
+                        <th class="pk">ID Livre</th>
+                        <th>Titre</th>
+                        <th>Format</th>
                         <th>Auteur</th>
                         <th>Auteur Nationalité</th>
                         <th>Prix</th>
@@ -139,6 +147,7 @@
                     </thead>
                     <tbody>
                     <tr>
+                        <td>1</td>
                         <td>Les misérables</td>
                         <td>Rigide</td>
                         <td>Victor Hugo</td>
@@ -150,6 +159,7 @@
                         <td>Roman</td>
                     </tr>
                     <tr>
+                        <td>2</td>
                         <td>Hamlet</td>
                         <td>Ebook</td>
                         <td>William Shakespeare</td>
@@ -219,25 +229,25 @@
                     <caption>Livre - Sujet</caption>
                     <thead>
                     <tr>
-                        <th class="pk">Titre Livre</th>
+                        <th class="pk">ID Livre</th>
                         <th class="pk">ID Sujet</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Les misérables</td>
+                        <td>1</td>
                         <td>1</td>
                     </tr>
                     <tr>
-                        <td>Les misérables</td>
+                        <td>1</td>
                         <td>2</td>
                     </tr>
                     <tr>
-                        <td>Les misérables</td>
+                        <td>1</td>
                         <td>3</td>
                     </tr>
                     <tr>
-                        <td>Hamlet</td>
+                        <td>2</td>
                         <td>1</td>
                     </tr>
                     </tbody>
@@ -254,8 +264,9 @@
             <caption>Livre</caption>
             <thead>
             <tr>
-                <th class="pk">Titre</th>
-                <th class="pk">Format</th>
+                <th class="pk">ID Livre</th>
+                <th>Titre</th>
+                <th>Format</th>
                 <th>Auteur</th>
                 <th>Auteur Nationalité</th>
                 <th>Prix</th>
@@ -267,6 +278,7 @@
             </thead>
             <tbody>
             <tr>
+                <td>1</td>
                 <td>Les misérables</td>
                 <td>Rigide</td>
                 <td>Victor Hugo</td>
@@ -278,6 +290,7 @@
                 <td>Roman</td>
             </tr>
             <tr>
+                <td>2</td>
                 <td>Les misérables</td>
                 <td>Ebook</td>
                 <td>Victor Hugo</td>
@@ -289,6 +302,7 @@
                 <td>Roman</td>
             </tr>
             <tr>
+                <td>3</td>
                 <td>Hamlet</td>
                 <td>Ebook</td>
                 <td>William Shakespeare</td>
@@ -313,7 +327,8 @@
                     <caption>Livre</caption>
                     <thead>
                     <tr>
-                        <th class="pk">Titre</th>
+                        <th class="pk">ID Livre</th>
+                        <th>Titre</th>
                         <th>Auteur</th>
                         <th>Auteur Nationalité</th>
                         <th>Pages</th>
@@ -324,6 +339,7 @@
                     </thead>
                     <tbody>
                     <tr>
+                        <td>1</td>
                         <td>Les misérables</td>
                         <td>Victor Hugo</td>
                         <td>Française</td>
@@ -333,6 +349,7 @@
                         <td>Roman</td>
                     </tr>
                     <tr>
+                        <td>2</td>
                         <td>Hamlet</td>
                         <td>William Shakespeare</td>
                         <td>Anglaise</td>
@@ -346,28 +363,49 @@
             </div>
             <div class="col">
                 <table class="db-table" style="font-size: 0.5em;">
+                    <caption>Format</caption>
+                    <thead>
+                    <tr>
+                        <th class="pk">ID Format</th>
+                        <th>Nom</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Rigide</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Ebook</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <table class="db-table" style="font-size: 0.5em;">
                     <caption>Format - Prix</caption>
                     <thead>
                     <tr>
-                        <th class="pk">Titre</th>
-                        <th class="pk">Format</th>
+                        <th class="pk">ID Livre</th>
+                        <th class="pk">ID Format</th>
                         <th>Prix</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Les misérables</td>
-                        <td>Rigide</td>
+                        <td>1</td>
+                        <td>1</td>
                         <td>29.90</td>
                     </tr>
                     <tr>
-                        <td>Les misérables</td>
-                        <td>Ebook</td>
+                        <td>1</td>
+                        <td>2</td>
                         <td>19.90</td>
                     </tr>
                     <tr>
-                        <td>Hamlet</td>
-                        <td>Ebook</td>
+                        <td>2</td>
+                        <td>2</td>
                         <td>5.90</td>
                     </tr>
                     </tbody>
@@ -390,24 +428,27 @@
             <caption>Livre</caption>
             <thead>
             <tr>
-                <th class="pk">Titre</th>
-                <th>Auteur</th>
+                <th class="pk">ID Livre</th>
+                <th>Titre</th>
+                <th>ID Auteur</th>
                 <th>Pages</th>
-                <th>Éditeur</th>
+                <th>ID Éditeur</th>
                 <th>ID Genre</th>
             </tr>
             </thead>
             <tbody>
             <tr>
+                <td>1</td>
                 <td>Les misérables</td>
-                <td>Victor Hugo</td>
+                <td>1</td>
                 <td>2598</td>
                 <td>1</td>
                 <td>1</td>
             </tr>
             <tr>
+                <td>2</td>
                 <td>Hamlet</td>
-                <td>William Shakespeare</td>
+                <td>2</td>
                 <td>342</td>
                 <td>2</td>
                 <td>2</td>
@@ -420,16 +461,19 @@
                     <caption>Auteur</caption>
                     <thead>
                     <tr>
-                        <th class="pk">Auteur</th>
-                        <th>Auteur Nationalité</th>
+                        <th class="pk">ID Auteur</th>
+                        <th>Auteur</th>
+                        <th>Nationalité</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
+                        <td>1</td>
                         <td>Victor Hugo</td>
                         <td>Française</td>
                     </tr>
                     <tr>
+                        <td>2</td>
                         <td>William Shakespeare</td>
                         <td>Anglaise</td>
                     </tr>
@@ -458,6 +502,9 @@
                 </table>
             </div>
         </div>
+        <footer>
+            <a href="#" class="info">Remarquez-vous une autre optimisation possible ?</a>
+        </footer>
     </section>
 
     <section>
